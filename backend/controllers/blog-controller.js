@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Blog from "../model/blog";
 import User from "../model/user";
+import { response } from "express";
 
 
 // get All Blog posts
@@ -101,4 +102,18 @@ export const deleteBlog = async  (req, res)=>{
     return res.status(500).json({message: 'Unable to delete Blog'});
   }
   return res.status(200).json({message: 'Blog deleted successfully'});
+}
+// get user by ID
+export const getByUserID = async (req, res) => {
+  const userID = req.params.id;
+  let userBlogs;
+  try {
+    userBlogs = await User.findById(userID).populate('blogs')
+  } catch (error) {
+    return console.log(error);
+  }
+  if(!userBlogs){
+    return response.status(404).json({message: 'No blog found'});
+  }
+  return res.status(200).json({blog: userBlogs});
 }
