@@ -6,8 +6,11 @@ import router from "./routes/user-routes";
 // initialize express
 const app = express();
 
-
-app.use('/api/users', router);
+/** **********************************************************/
+// parse the request from body so the db can understand the data being sent for storage
+app.use(express.json());
+/** **********************************************************/
+app.use('/api/user', router);
 
 // Connecting to mongoDB....hide mongoDB url later
 const connectDB = async () =>{
