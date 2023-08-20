@@ -1,6 +1,7 @@
 import User from "../model/user";
+import bcryptjs from "bcryptjs";
 
-export const getAllUser = async (req, res, next)=>{
+export const getAllUser = async (req, res, next) => {
   let users;
   try {
     users = await User.find();
@@ -10,9 +11,9 @@ export const getAllUser = async (req, res, next)=>{
   }
 
   if (!users){
-    return res.status(404).json({message: 'No users found'});
+    return res.status(404).json({message: 'No Users found'});
   }
-  return res.status(200).json({User});
+  return res.status(200).json({users});
 };
 
 export const signup = async (req, res, next) => {
@@ -30,10 +31,11 @@ export const signup = async (req, res, next) => {
   }
 
   // if no existing user exists, create a new one
+  const hashedPassword = bcryptjs.hashSync(password);
   const user = new User({
     name,
     email,
-    password
+    password:hashedPassword
   });
 
   try {
