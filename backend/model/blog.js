@@ -16,7 +16,8 @@ const blogSchema = new Schema({
     required: true,
   },
   user:{
-    type: String,
+    type: mongoose.Types.ObjectId,
+    ref: 'user', //each user can have multiple blogs
     required: true
   }
 });
