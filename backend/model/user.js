@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const Schema = new mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   name:{
@@ -17,4 +17,6 @@ const userSchema = new Schema({
     required: true,
     minLength: 6,
   }
-})
+});
+
+export default mongoose.model('User', userSchema)

@@ -1,12 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
+import router from "./routes/user-routes";
+
 
 // initialize express
 const app = express();
 
-app.use('/api', (req, res, next) => {
-  res.send('hello world!!!')
-});
+
+app.use('/api/users', router);
 
 // Connecting to mongoDB....hide mongoDB url later
 const connectDB = async () =>{
@@ -20,12 +21,6 @@ const connectDB = async () =>{
     }
 }
 connectDB();
-
-
-
-
-
-
 
 // Port Listening
 const PORT = process.env.PORT || 3000;
