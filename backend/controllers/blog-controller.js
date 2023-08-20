@@ -33,6 +33,9 @@ export const addBlog = async (req, res, next) => {
   }
   const blog = new Blog({title, description, image, user});
   try {
+    /**Here I'm definning a session to save the bog, then start the session, 
+     * save the blog and the array and push
+     * to the array of the user andd commiting the transaction.*/
     const session = await mongoose.startSession();
     session.startTransaction();
     await blog.save({session});
